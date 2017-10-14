@@ -1,0 +1,25 @@
+	
+<table class="table table-bordered table-striped">
+ <thead class="thin-border-bottom">
+  <tr>
+    <?php $cadena = $this->ttablasRSS;
+    $titulo='';$sw=0;
+    for( $i=0; $i<=strlen($cadena); $i++)
+      {
+	 $caracter = substr($cadena,$i,1);      
+         if ($caracter!=',')
+             $titulo=$titulo.$caracter;
+         else 
+            $sw=1;
+         
+       if ( ($sw==1)or ($i==strlen($cadena)) )     
+       { ?>
+         <th width="11%"><?php echo $titulo; ?></th>
+    <?php
+         $titulo='';$sw=0;
+       }
+     } ?>    
+  </tr>
+ </thead>
+ <tbody>
+    

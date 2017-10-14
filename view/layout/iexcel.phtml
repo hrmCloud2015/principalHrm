@@ -1,0 +1,11 @@
+<form action="<?php echo $this->basePath() ?>/constructor/constructor/listef" target="_blank" method="post" >
+<input type="hidden" id="funcion" name="funcion" value="<?php echo $this->funcion; ?>"> 
+<input type="hidden" id="consulta" name="consulta" value="<?php echo $this->consulta; ?>"> 
+<input type="hidden" id="datos" name="datos" value="<?php echo $this->datosE; ?>"> 
+<input type="hidden" id="columnas" name="columnas" value="<?php echo $this->columnas; ?>"> 
+<input type="hidden" id="filtros" name="filtros" value="<?php echo $this->filtros; ?>"> 
+
+ <div class="col-sm-2">     
+   <input name="send" type="submit" id="submitbutton" class="btn btn-white btn-success btn-sm" value="Enviar listado a excel">
+ </div>     
+</form> 

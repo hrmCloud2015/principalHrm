@@ -1,0 +1,24 @@
+<hr />                                                                   
+<?php 
+if (isset($this->spdf))
+{
+  //print_r($this->datos);  
+    
+  //echo $this->render('layout/pdf') ;
+?>
+<!-- Se arma de forma manual por daños en el codigo css-->                                                                
+<form action="<?php echo $this->basePath() ?>/constructor/constructor/listm" target="_blank" method="post" >
+    <input type="hidden" id="modelo" name="modelo" value="<?php echo $this->modelo; ?>"> 
+    <input type="hidden" id="funcion" name="funcion" value="<?php echo $this->funcion; ?>"> 
+    
+    <input type="hidden" id="columnas" name="columnas" value="<?php echo $this->columnas; ?>"> 
+    <input type="hidden" id="datos" name="datos" value="<?php echo $this->datos; ?>"> 
+    <input type="hidden" id="titulo" name="titulo" value="<?php echo $this->titulo; ?>">     
+    <input type="hidden" id="filtros" name="filtros" value="<?php echo $this->filtros; ?>">     
+    
+    <input type="submit" id="nombre" name="nombre" class="btn btn-success btn-small tooltip-success" value="Enviar listado a excel"/>
+
+</form>
+<?php                                                                
+}?>                                                                 
+                                                                                                                                             

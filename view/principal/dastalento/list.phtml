@@ -1,0 +1,68 @@
+<?php  
+echo $this->render('layout/charts') ?>
+<?php echo $this->render('layout/titulo') ?>
+
+<?php // Grafico
+$this->grafico='Graficos distribución hombre y mujeres en la compañía.';
+echo $this->render('layout/graficosItems'); ?>
+<div class="row"><!-- GRUPO DE GRAFICOS 1 -->
+<?php
+  // GRAFICO DE SEXOS
+  $this->consulta='';
+  $this->gra = 1;   
+  foreach($this->datSexo as $dat) 
+  {
+     $this->consulta = $this->consulta.'{
+            "campo'.$this->gra.'": "'.$dat['nombre'].'",
+            "valor'.$this->gra.'": '.$dat['valor'].',
+        }, ';
+  }// Fin recorrido
+  //echo $this->consulta;
+  ?>
+  <div class="col-sm-3">	
+   <?php 
+   $this->titGrafico='Distribución de sexos';    
+   $this->grafico = 'dona'; 
+   echo $this->render('layout/gDona3d') ?>
+  </div>
+
+<?php
+  // GRAFICO DE LAS EDADES DE EMPLEADOS
+  $this->consulta='';  
+  $this->gra = 2;
+  foreach($this->datEdades as $dat)  
+  {
+     $this->consulta = $this->consulta.'{
+            "campo'.$this->gra.'": "'.$dat['edad'].'",
+            "valor'.$this->gra.'": '.$dat['numero'].',
+        }, ';
+  }// Fin recorrido
+  ?>
+  <div class="col-sm-3">	
+   <?php 
+   $this->titGrafico='Distribución de edades';    
+   $this->grafico = 'donaEdades'; 
+   echo $this->render('layout/gDona3d') ?>
+  </div>  
+
+<?php
+  // GRAFICO DE LAS EDADES Y SEXO DE EMPLEADOS
+  $this->consulta='';  
+  $this->gra = 3;
+  foreach($this->datSexEdad as $dat)  
+  {
+     $this->consulta = $this->consulta.'{
+            "campo'.$this->gra.'": "'.$dat['sexo'].'-'.$dat['edad'].'",
+            "valor'.$this->gra.'": '.$dat['numero'].',
+        }, ';
+  }// Fin recorrido
+  ?>
+  <div class="col-sm-3">	
+   <?php 
+   $this->titGrafico='Distribución de edades y sexos';    
+   $this->grafico = 'donaEdadesSex'; 
+   echo $this->render('layout/gDona3d') ?>
+  </div>  
+
+</div><!-- FIN GRUPO DE GRAFICOS 1 -->
+

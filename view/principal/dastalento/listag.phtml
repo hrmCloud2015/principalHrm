@@ -1,0 +1,447 @@
+<hr /> 
+<?php 
+ $this->th3 = 'c.c.'.$this->datEmp['CedEmp'].' - '.$this->datEmp['nombre'].' '.$this->datEmp['apellido'];
+ echo $this->render('layout/h3rojo') ?>
+
+<div class="tabbable">
+         <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
+ 	   <li class="active"><a data-toggle="tab" href="#datos"><i class="green icon-external-link bigger-110"></i>Datos basicos</a></li>
+	   <li><a data-toggle="tab" href="#vaca"><i class="green icon-fighter-jet bigger-110"></i>Vacaciones</a></li>
+	   <li><a data-toggle="tab" href="#aus"><i class="green icon-exchange bigger-110"></i>Ausentismos</a></li>           
+	   <li><a data-toggle="tab" href="#inc"><i class="green icon-briefcase bigger-110"></i>Incapacidades</a></li>                      
+	   <li><a data-toggle="tab" href="#emb"><i class="green icon-legal bigger-110"></i>Embargos</a></li>                                 
+	   <li><a data-toggle="tab" href="#dot"><i class="green icon-headphones bigger-110"></i>Dotaciones</a></li>                                            
+	   <li><a data-toggle="tab" href="#des"><i class="green icon-bullhorn bigger-110"></i>Descargos</a></li>                                                       
+	   <li><a data-toggle="tab" href="#cap"><i class="green icon-edit bigger-110"></i>Capacitaciones</a></li>                                                                  
+	   <li><a data-toggle="tab" href="#eve"><i class="green icon-group bigger-110"></i>Eventos</a></li>                                                                             
+	   <li><a data-toggle="tab" href="#pres"><i class="green icon-credit-card bigger-110"></i>Prestamos</a></li>                                                                                        
+        </ul>
+      </div>
+	  
+    
+
+    <div class="tab-content">
+      <div id="datos" class="tab-pane in active"><!-- datos basicos -->   
+
+<div class='span8'>                   
+<?php 
+foreach ($this->datBas as $dato){
+   $id = $dato['id'] ;
+}
+?>          
+<table class="table table-striped table-bordered table-hover" >
+    <tr><td><strong>Cargo:</strong>
+<?php
+    echo $dato['nomCar'];
+?>
+</td>
+<td><strong>Centro de costo</strong>:
+<?php
+    echo $dato['nomCcos'];
+?>
+</td><td><strong>Sueldo:</strong>        
+<?php
+    echo number_format($dato['sueldo']);
+?>
+</td></tr>      
+</table>               
+          
+<table  class="table table-striped table-bordered table-hover" >
+<tr>
+ <td><strong>Fecha de nacimiento:</strong>  
+<?php
+    echo $dato['FecNac'];
+?>
+</td>    
+    <td><strong>Dirección: </strong>
+<?php
+    echo $dato['DirEmp'];
+?>
+</td>
+<td><strong>Telefono:</strong>                                                                                                     
+<?php
+    echo $dato['TelEmp'];
+?>
+</td>
+<td><strong>e-mail:</strong>                                                                                                     
+<?php
+    echo $dato['email'];
+?>
+</td>
+</tr>
+</table>
+<h5><strong>Clasificaciones</strong></h5>
+<table  class="table table-striped table-bordered table-hover" >
+<tr>
+ <td><strong>Salud:</strong>  
+<?php
+    echo $dato['nomSal'];
+?>
+</td>    
+    <td><strong>Pensión: </strong>
+<?php
+    echo $dato['nomPen'];
+?>
+</td>
+<td><strong>Cesantias:</strong>                                                                                                     
+<?php
+    echo $dato['nomCes'];
+?>
+</td>
+<td><strong>Arl:</strong>                                                                                                     
+<?php
+    echo $dato['nomArp'];
+?>
+</td>
+</tr>
+<tr>
+ <td><strong>Tipo de empleado:</strong>  
+<?php
+    echo $dato['nomTemp'];
+?>
+</td>    
+    <td><strong>Grupo: </strong>
+<?php
+    echo $dato['nomGrup'];
+?>
+</td>
+<td><strong>Cesantias:</strong>                                                                                                     
+<?php
+    echo $dato['nomCes'];
+?>
+</td>
+<td><strong>Tipo de contrato:</strong>                                                                                                     
+<?php
+    echo $dato['nomTcon'];
+?>
+</td>
+</tr>
+
+</table>
+<hr />
+<table  class="table table-striped table-bordered table-hover" >
+<tr>
+ <td><strong>Fecha de ingreso:</strong>  
+<?php
+    echo $dato['fecIng'];
+?>
+ </td>    
+ <td><strong>Dias laborados:</strong>  
+<?php
+    echo $dato['dias'];
+?>
+ </td>     
+ <td><strong>Años laborados:</strong>  
+<?php
+    echo $dato['anos'];
+?>
+ </td>      
+</tr>
+</table>
+</div>
+        <div class="col-xs-9 col-sm-3">  <!-- FOTOGRAFIA -->  
+   <br />
+   <img alt="" src="<?php echo $this->basePath() ?>/img/datos/empleados/e<?php echo $this->idEmp ?>.jpg" />    
+   <br />
+	<div class="widget-toolbar no-border">            
+
+            
+        </div>           
+    
+</div><!-- FIN FOTOGRAFIA -->                                
+                 
+          
+          
+          
+      </div><!-- Fin datos basicos -->  
+
+      <div id="vaca" class="tab-pane in active"><!-- datos vacaciones -->   
+
+          
+<table class="table table-striped table-bordered table-hover" > 
+    <tr>
+        <th>Periodo</th>  
+        <th>Dias</th>          
+        <th>Doc. pago</th>                          
+        <th>Dias pagados</th>                  
+        <th>Fecha</th>                                  
+        <th>Valor</th>                                  
+    </tr>
+<?php 
+$valor=0;$dias=0;$diasP=0;
+foreach ($this->datVac as $dato){ // Vacaciones   
+?>    
+    <tr>
+        <td><?php echo $dato['fechaI'].' - '.$dato['fechaF'] ; ?></td>                
+        <td><?php echo 15 ; ?></td>                
+        <td><?php echo $dato['idVac'] ; ?></td>                        
+        <td><?php echo $dato['dias'] ; ?></td>                                        
+        <td><?php echo $dato['fecDoc'] ; ?></td>                                
+        <td><?php echo number_format($dato['valor']) ; ?></td>                                        
+    </tr>   
+<?php
+$valor = $valor + $dato['valor'];
+$diasP = $diasP + $dato['dias'];
+$dias = $dias + 15;
+} ?>    
+    <tr>
+        <td><strong>Dias vacaciones</strong></td>                
+        <td><?php echo number_format($dias) ; ?></td>                
+        <td><strong>Dias pagados</strong></td>                
+        <td><?php echo number_format($diasP) ; ?></td>                
+        <td><strong>Total pagado</strong></td>                                
+        <td><?php echo number_format($valor) ; ?></td>                                        
+    </tr>       
+    <tr>
+        <td></td>                
+        <td></td>                
+        <td><strong>Dias pagados pendientes</strong></td>                
+        <td><?php echo number_format($dias - $diasP) ; ?></td>                
+        <td></td>                                
+        <td></td>                                        
+    </tr>       
+</table>          
+          
+          
+          
+      </div><!-- Fin datos vacaciones -->        
+      
+
+      <div id="aus" class="tab-pane in active"><!-- datos ausentismos -->   
+
+          
+<table class="table table-striped table-bordered table-hover" > 
+    <tr>
+        <th>Doc.</th>  
+        <th>Fecha documento</th>          
+        <th>Periodo</th>          
+        <th>Tipo</th>                          
+    </tr>
+<?php 
+foreach ($this->datAus as $dato){ // Ausentismos
+?>    
+    <tr>
+        <td><?php echo $dato['id'] ; ?></td>                                
+        <td><?php echo $dato['fecDoc'] ; ?></td>                                        
+        <td><?php echo $dato['fechai'].' - '.$dato['fechaf'] ; ?></td>                
+        <td><?php echo $dato['nomTaus'] ; ?></td>                                        
+    </tr>   
+<?php
+} ?>    
+</table>           
+          
+          
+          
+      </div><!-- Fin datos ausentismos -->              
+
+      
+      <div id="inc" class="tab-pane in active"><!-- datos incapacidades -->   
+
+          
+<table class="table table-striped table-bordered table-hover" > 
+    <tr>
+        <th>Doc.</th>  
+        <th>Fecha documento</th>          
+        <th>Periodo</th>          
+        <th>Tipo</th>                          
+    </tr>
+<?php 
+foreach ($this->datInc as $dato){ // Incapacidades
+?>    
+    <tr>
+        <td><?php echo $dato['id'] ; ?></td>                                
+        <td><?php echo $dato['fecDoc'] ; ?></td>                                        
+        <td><?php echo $dato['fechai'].' - '.$dato['fechaf'] ; ?></td>                
+        <td><?php echo $dato['nomTinc'] ; ?></td>                                        
+    </tr>   
+<?php
+} ?>    
+</table>           
+          
+          
+          
+      </div><!-- Fin datos incapacidades -->                    
+
+
+      <div id="emb" class="tab-pane in active"><!-- datos embargos-->   
+
+          
+<table class="table table-striped table-bordered table-hover" > 
+    <tr>
+        <th>Doc.</th>  
+        <th>Fecha documento</th>
+        <th>Tipo</th>                                  
+        <th>Valor</th>          
+    </tr>
+<?php 
+foreach ($this->datEmb as $dato){ // Embargos
+?>    
+    <tr>
+        <td><?php echo $dato['id'] ; ?></td>                                
+        <td><?php echo $dato['fecDoc'] ; ?></td>                 
+        <td><?php echo $dato['nomTemb'] ; ?></td>                                                
+        <td><?php echo $dato['formula'] ; ?></td>                
+    </tr>   
+<?php
+} ?>    
+</table>       
+                 
+         
+      </div><!-- Fin datos embargos -->                          
+      
+
+      
+      
+    <div id="dot" class="tab-pane in active"><!-- datos dotaciones-->   
+
+          
+<table class="table table-striped table-bordered table-hover" > 
+    <tr>
+        <th>Doc.</th>  
+        <th>Fecha de entrega</th>
+        <th>Dotación</th>                                  
+    </tr>
+<?php 
+foreach ($this->datGdot as $dato){ // Dotaciones
+?>    
+    <tr>
+        <td><?php echo $dato['id'] ; ?></td>                                
+        <td><?php echo $dato['fecDoc'] ; ?></td>                 
+        <td><?php echo $dato['nomGdot'] ; ?></td>                                                
+    </tr>   
+<?php
+} ?>    
+</table>       
+                 
+         
+      </div><!-- Fin datos dotaciones -->                          
+
+      
+    <div id="des" class="tab-pane in active"><!-- datos descargos-->   
+
+          
+<table class="table table-striped table-bordered table-hover" > 
+    <tr>
+        <th>Doc.</th>  
+        <th>Fecha documento</th>
+        <th>Tipo de desargo</th>                                  
+        <th>Suceso</th>                                          
+    </tr>
+<?php 
+foreach ($this->datDesc as $dato){ // Descargos
+?>    
+    <tr>
+        <td><?php echo $dato['id'] ; ?></td>                                
+        <td><?php echo $dato['fecDoc'] ; ?></td>                 
+        <td><?php echo $dato['nomTdesc'] ; ?></td>                                                
+        <td><?php echo $dato['suceso'] ; ?></td>                                                        
+    </tr>   
+<?php
+} ?>    
+</table>                        
+         
+      </div><!-- Fin datos descargos-->         
+
+      
+    <div id="cap" class="tab-pane in active"><!-- datos capacitaciones -->   
+
+          
+<table class="table table-striped table-bordered table-hover" > 
+    <tr>
+        <th>Doc.</th>  
+        <th>Fecha documento</th>
+        <th>Area</th>                                  
+    </tr>
+<?php 
+foreach ($this->datCap as $dato){ // Capacitaciones
+?>    
+    <tr>
+        <td><?php echo $dato['id'] ; ?></td>                                
+        <td><?php echo $dato['fecDoc'] ; ?></td>                 
+        <td><?php echo $dato['nomArea'] ; ?></td>                                                
+    </tr>   
+<?php
+} ?>    
+</table>       
+                 
+         
+      </div><!-- Fin Fin datos capacitaciones -->               
+
+    <div id="eve" class="tab-pane in active"><!-- datos evento -->   
+
+          
+<table class="table table-striped table-bordered table-hover" > 
+    <tr>
+        <th>Doc.</th>  
+        <th>Fecha documento</th>
+        <th>Tipo de evento</th>                                  
+    </tr>
+<?php 
+foreach ($this->datEve as $dato){ // Eventos
+?>    
+    <tr>
+        <td><?php echo $dato['id'] ; ?></td>                                
+        <td><?php echo $dato['fecDoc'] ; ?></td>                 
+        <td><?php echo $dato['nomTeve'] ; ?></td>                                                
+    </tr>   
+<?php
+} ?>    
+</table>       
+                 
+         
+      </div><!-- Fin Fin datos evento -->                     
+      
+      
+
+    <div id="pres" class="tab-pane in active"><!-- datos prestamos -->   
+
+          
+<table class="table table-striped table-bordered table-hover" > 
+    <tr>
+        <th>Doc.</th>  
+        <th>Fecha documento</th>
+        <th>Tipo</th>                                  
+        <th>Cuotas</th>                                          
+        <th>Valor cuota</th>                                                  
+        <th>Valor</th>                                  
+        <th>Abonado</th>                                          
+        <th>Saldo</th>                                                  
+    </tr>
+<?php 
+$valor = 0; $valPag=0; 
+foreach ($this->datPres as $dato){ // Prestamos
+?>    
+    <tr>
+        <td><?php echo $dato['id'] ; ?></td>                                
+        <td><?php echo $dato['fecDoc'] ; ?></td>                 
+        <td><?php echo $dato['nomTpres'] ; ?></td>               
+        <td><?php echo $dato['cuotas'] ; ?></td>                         
+        <td><?php echo number_format($dato['valCuota']) ; ?></td>                                 
+        <td><?php echo number_format($dato['valor']) ; ?></td>                                         
+        <td><?php echo number_format($dato['pagado'] ) ; ?></td>                                                 
+        <td><?php echo number_format( $dato['valor'] - ( $dato['pagado'])  ) ; ?></td>                                                         
+    </tr>   
+<?php
+ $valor = $valor + $dato['valor']; 
+ $valPag = $valPag + ( $dato['pagado']+$dato['saldoIni'] );  
+} ?>    
+    
+    <tr>
+        <td></td>                                
+        <td></td>                 
+        <td></td>               
+        <td></td>                         
+        <td><strong>TOTALES</strong></td>                                 
+        <td><?php echo number_format($valor) ; ?></td>                                         
+        <td><?php echo number_format($valPag) ; ?></td>                                                 
+        <td><?php echo number_format( $valor - $valPag ) ; ?></td>                                                         
+    </tr>       
+    
+</table>       
+                 
+         
+      </div><!-- Fin prestamos -->                           
+      
+      
+      
+   </div>        

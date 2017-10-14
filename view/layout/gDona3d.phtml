@@ -1,0 +1,19 @@
+<!-- Styles -->
+<!-- Chart code -->
+<script>
+var chart = AmCharts.makeChart( "<?php echo $this->grafico; ?>", {
+  "type": "pie",
+  "theme": "light",
+  "dataProvider": [  <?php echo $this->consulta; ?> ],
+  "valueField": "valor<?php echo $this->gra?>",
+  "titleField": "campo<?php echo $this->gra?>",
+   "balloon":{
+   "fixedPosition":true
+  },
+  "export": {
+    "enabled": true
+  }
+} );
+</script>
+<div id="<?php echo $this->grafico; ?>" style="width:100%; height:500px;"></div>
+

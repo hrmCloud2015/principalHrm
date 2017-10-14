@@ -1,0 +1,14 @@
+<?php 
+$hab=1;
+if ( isset($daPer['nuevo']) ){ // Si existe se compara permiso en base de datos
+   $hab = $daPer['nuevo'];
+ } ?>
+<?php 
+if ($hab==1) // Verificar si tienes permisos para este modulo
+{
+   if (isset($this->nuevo))
+       echo $this->nuevo; 
+   else 
+       echo 'Ingreso de un nuevo registro'; ?>	
+  <img src="<?php echo $this->basePath()."/" ?>img/nuevo.png" title='Nuevo registro' width="16" height="16" />
+<?php } ?>  

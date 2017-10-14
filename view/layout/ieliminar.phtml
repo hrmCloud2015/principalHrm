@@ -1,0 +1,36 @@
+<?php 
+$hab=1;
+// Para obtener el valor de $daPer se debe tener la consulta de LogFun donde vengan los permisos
+if ( isset($daPer['eliminar']) ){ // Si existe se compara permiso en base de datos
+   //$hab = $daPer['modificar'];
+ } ?>
+<?php 
+//echo 'Eliminar';
+if ($hab==1) // Verificar si tienes permisos para este modulo
+{ 
+   $idEli = 'b'; 
+   if (isset($this->idEli)) 
+       $idEli = $this->idEli; 
+    ?>	
+  <!-- <img src="<?php echo $this->basePath()."/" ?>img/delete.png" id='<?php echo $idEli; ?>' class='eliminar' title='Eliminar este registro' width="16" height="16" />-->
+
+  <i class="ace-icon red fa fa-trash-o bigger-130"></i>
+
+<?php } ?>  
+<script>
+$(function (){
+
+   $('#eliminar<?php echo $idEli ?>').click(function(){    
+      if (!confirm("¿ Esta seguro desea eliminar este registro ?"))
+      {
+           return false;
+      }       
+   }); 
+   // Codigo que evita el doble guardado 
+   $('#eliminar<?php echo $idEli ?>').bind('click', function(){
+      $(this).unbind().bind('click', function(){
+       return false;
+     });
+   });
+})  
+</script>

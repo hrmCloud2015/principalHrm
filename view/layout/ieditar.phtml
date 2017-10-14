@@ -1,0 +1,11 @@
+<?php 
+$hab=1;
+if ( isset($daPer['modificar']) ){ // Si existe se compara permiso en base de datos
+   $hab = $daPer['modificar'];
+ } ?>
+<?php 
+if ($hab==1) // Verificar si tienes permisos para este modulo
+{ ?>	
+  <!-- <img src="<?php echo $this->basePath()."/" ?>img/editar.png" title='Editar este registro' width="16" height="16" />-->
+  <i class="ace-icon fa fa-pencil bigger-130"></i>
+<?php } ?>  

@@ -1,0 +1,23 @@
+<?php
+$eli='';
+if (isset($this->idC))
+	$eli=$this->idC;
+?>
+	<img src="<?php echo $this->basePath()."/" ?>img/cerrado.png" title='Cerrar documento' class='cerrar<?php echo $eli;?>' width="16" height="16" />
+
+<script>
+$(function (){
+   $('#cerrar<?php echo $eli;?>').click(function(){ 
+       if (!confirm("¿ Esta seguro desea cerrar el documento ?"))
+       {
+           return false;
+       }
+   }); 
+   // Codigo que evita el doble guardado 
+   $('#cerrar<?php echo $eli ?>').bind('click', function(){
+      $(this).unbind().bind('click', function(){
+       return false;
+     });
+   });   
+})  
+</script>

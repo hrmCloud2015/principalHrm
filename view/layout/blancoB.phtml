@@ -1,0 +1,32 @@
+<?php echo $this->doctype(); ?>
+
+ <!-- estilo de letras -->
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/font-awesome.min.css" />
+ <!-- ace styles -->                 
+ 
+ <!-- Jquery --> 
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/jquery-ui.css" />
+ 
+ <script src="<?php echo $this->basePath()."/" ?>assets/js/jquery.js"></script> 
+ 
+ <?php echo $this->content; ?>
+
+    <!-- SCRIPT JS -->
+<script src="<?php echo $this->basePath()."/" ?>assets/js/jquery-ui.js"></script>
+
+
+<!-- Busquedas incrementales en select (No mover de aquil depende de ac.min.js) -->
+<script type="text/javascript">
+  $(function(){
+    $(".chzn-select").chosen(); 
+    $(".chzn-select-deselect").chosen({allow_single_deselect:true});     
+  });  
+</script>
+
+
+<script src="<?php echo $this->basePath()."/" ?>assets/js/chosen.jquery.min.js"></script>
+
+<script src="<?php echo $this->basePath()."/" ?>assets/js/jquery.dataTables.min.js"></script>
+
+  
+

@@ -1,0 +1,37 @@
+<?php
+// Definicio el cuadro
+switch ($this->titCuadro) {
+  case 'Incapacidades':
+    $icono = 'ace-icon fa fa-plus-square';
+    $color = 'orange2';
+    break;
+  case 'Prorrogas':
+    $icono = 'ace-icon fa fa-plus-square';
+    $color = 'red';    
+    break;  
+  case 'Ausentismos':
+    $icono = 'ace-icon fa fa-twitter';
+    $color = 'blue';    
+    break;      
+}
+
+?>
+                    <div class="infobox infobox-<?php echo $color ?>">
+                      <!-- #section:pages/dashboard.infobox.sparkline -->
+                      <div class="infobox-icon">
+                        <i class="<?php echo $icono ?>"></i>
+                      </div>
+
+                      <!-- /section:pages/dashboard.infobox.sparkline -->
+                      <div class="infobox-data">
+                        <span class="infobox-data-number"><?php echo $this->num ?></span>
+                        <div class="infobox-content"><?php echo $this->titCuadro ?></div>
+                      </div>
+
+                      <div class="badge badge-alert">
+                        <i class="ace-icon fa fa-arrow-up"></i>
+                        <?php echo $this->num2 ?>
+                      </div>
+
+
+                    </div>

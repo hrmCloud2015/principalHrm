@@ -1,0 +1,26 @@
+<div class="row-fluid">
+	
+<table class="table table-striped table-bordered table-hover">
+ <thead>
+  <tr>
+    <?php $cadena = $this->ttablas;
+    $titulo='';$sw=0;
+    for( $i=0; $i<=strlen($cadena); $i++)
+      {
+	 $caracter = substr($cadena,$i,1);      
+         if ($caracter!=',')
+             $titulo=$titulo.$caracter;
+         else 
+            $sw=1;
+         
+       if ( ($sw==1)or ($i==strlen($cadena)) )     
+       { ?>
+         <th width="11%"><?php echo $titulo; ?></th>
+    <?php
+         $titulo='';$sw=0;
+       }
+     } ?>    
+  </tr>
+ </thead>
+ <tbody>
+    

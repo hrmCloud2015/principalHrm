@@ -1,0 +1,42 @@
+        <script>
+            var chart;
+
+            var chartData<?php echo $this->gra?> = [<?php echo $this->consulta; ?>];
+
+            var chart = AmCharts.makeChart("grafico1d", {
+                type: "serial",
+                dataProvider: chartData<?php echo $this->gra?>,
+                categoryField: "datos",
+                depth3D: 20,
+                angle: 30,
+                valueAxes: [{
+                    title: "<?php echo $this->titGrafico ?>"
+                  }
+                ],
+                graphs: [
+                {
+                    valueField: "campo1",
+                    title : "<?php echo $this->titCampo1?>",
+                    type: "column",
+                    lineAlpha: 0,
+                    fillAlphas: 1,
+                    fillColors :"#FFD700",// Amarillo
+                },
+                             
+                ],
+                chartCursor: {
+                    cursorAlpha: 0,
+                    zoomable: false,
+                    categoryBalloonEnabled: false
+                },
+                "export": {
+                    "enabled": true
+                }                
+            });
+                // LEGEND
+                var legend = new AmCharts.AmLegend();
+                legend.useGraphSettings = true;
+                chart.addLegend(legend);        
+        </script>
+    
+        <div id="grafico1d" style="width: 100%; height: 400px;"></div>

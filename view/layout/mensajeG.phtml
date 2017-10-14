@@ -1,0 +1,15 @@
+<?php if ($this->idG==1){ ?>
+<div id="dialog"></div>
+<div class="alert alert-block alert-success" id="mensajeGuarddado">
+ <p>
+  <strong><i class="icon-ok" ></i> Registro </strong>
+  Guardado de forma correcta !
+ </p>
+</div>
+
+<script type="text/javascript">
+        $(document).ready(function(){
+            setTimeout(function(){ $("#mensajeGuarddado").fadeOut(800).fadeIn(800).fadeOut(500).fadeIn(500).fadeOut(300);}, 3000);  
+        });
+</script>
+<?php } ?>

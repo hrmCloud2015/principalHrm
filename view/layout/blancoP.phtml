@@ -1,0 +1,69 @@
+<?php echo $this->doctype(); ?>
+<head>
+ <meta charset="utf-8" />
+ <title>Nissi web 1.0</title>
+ <meta name="description" content="" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+ <!-- STILOS ********************************************************************************************** -->
+ <link href="<?php echo $this->basePath()."/" ?>assets/css/bootstrap.min.css" rel="stylesheet" />
+ <link href="<?php echo $this->basePath()."/" ?>assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
+ <!-- estilo de letras -->
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/font-awesome.min.css" />
+ <!-- ace styles -->
+ 
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/ace-responsive.min.css" />
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/ace-skins.min.css" />
+                
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/chosen.css" />  
+ <!-- Jquery --> 
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/jquery-ui.css" />
+ 
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/ace-rtl.min.css" />
+ 
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/ace.min2.css" />
+ 
+ <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>assets/css/ace.min.css" />
+
+        <script src="<?php echo $this->basePath()."/" ?>assets/js/jquery-ui-1.10.2.custom.min.js"></script>
+        <script src="<?php echo $this->basePath()."/" ?>assets/js/jquery.js"></script> 
+
+        <!-- Busquedas incrementales en select (No mover de aquil depende de ac.min.js) -->
+<script type="text/javascript">
+  $(function(){
+    $(".chzn-select").chosen(); 
+    $(".chzn-select-deselect").chosen({allow_single_deselect:true});     
+  });  
+</script>
+</head>
+
+<body>
+          <div class="container">                         
+              <?php echo $this->content; ?>
+          </div> <!-- /container -->
+
+<script src="<?php echo $this->basePath()."/" ?>assets/js/jquery-1.9.1"></script>
+<script src="<?php echo $this->basePath()."/" ?>assets/js/jquery-ui.js"></script>
+
+    <!-- SCRIPT JS -->
+<script src="<?php echo $this->basePath()."/" ?>assets/js/bootstrap.min.js"></script>
+<script src="<?php echo $this->basePath()."/" ?>assets/js/bootbox.min.js"></script>
+
+<!-- ace scripts -->
+<script src="<?php echo $this->basePath()."/" ?>assets/js/ace-elements.min.js"></script>
+
+
+<script src="<?php echo $this->basePath()."/" ?>assets/js/ace.min.js"></script>
+
+
+<script src="<?php echo $this->basePath()."/" ?>assets/js/ace.min2.js"></script>
+
+<script src="<?php echo $this->basePath()."/" ?>assets/js/chosen.jquery.min.js"></script>
+
+<script src="<?php echo $this->basePath()."/" ?>assets/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo $this->basePath()."/" ?>assets/js/jquery.dataTables.bootstrap.js"></script>                
+
+<!-- CHEditor --> 
+
+</body>
+</html>

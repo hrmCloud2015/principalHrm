@@ -1,0 +1,214 @@
+                                                         <!-- PAGE CONTENT INI -->
+
+
+        <script src="<?php echo $this->basePath()."/" ?>assets/js/jquery-1.9.1.js"></script>
+        <script src="<?php echo $this->basePath()."/" ?>assets/js/jquery-ui.js"></script>
+
+        <script src="<?php echo $this->basePath()."/" ?>assets/js/jquery-ui-1.10.2.custom.min.js"></script>                                                                
+<?php echo $this->content; ?>                                                        
+
+		<script src="<?php echo $this->basePath()."/" ?>assets/js/chosen.jquery.min.js"></script>
+
+                
+		<!-- ace scripts -->
+		<script src="<?php echo $this->basePath()."/" ?>assets/js/ace-elements.min.js"></script>
+		<script src="<?php echo $this->basePath()."/" ?>assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+
+			jQuery(function($) {
+				//var oTable1 = 				
+                            
+				$('#id-disable-check').on('click', function() {
+					var inp = $('#form-input-readonly').get(0);
+					if(inp.hasAttribute('disabled')) {
+						inp.setAttribute('readonly' , 'true');
+						inp.removeAttribute('disabled');
+						inp.value="This text field is readonly!";
+					}
+					else {
+						inp.setAttribute('disabled' , 'disabled');
+						inp.removeAttribute('readonly');
+						inp.value="This text field is disabled!";
+					}
+				});
+			
+
+				//override dialog's title function to allow for HTML titles
+				$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+					_title: function(title) {
+						var $title = this.options.title || '&nbsp;'
+						if( ("title_html" in this.options) && this.options.title_html == true )
+							title.html($title);
+						else title.text($title);
+					}
+				}));                        
+				$('.chosen-select').chosen({allow_single_deselect:true}); 
+				//resize the chosen on window resize             
+				$(window)
+
+				.on('resize.chosen', function() {
+					$('.chosen-select').each(function() 
+					{  
+						 var $this = $(this);
+						 // CODIGO HRM PARA EVITAR QUE SE DUPLIQUE EL TIPO DE LIST 
+						 // ESPECIAL SE DEVEBN AGREGAR ACA CUANOD SE REUIERA ESTE LAYOUT
+						 var idEle = $this.attr('id');
+						 if (idEle!='tipo')
+						 {	
+						    $this.next().css({'width': $this.parent().width()});
+						 }   
+					})
+				}).trigger('resize.chosen');
+			
+						
+				$('#chosen-multiple-style').on('click', function(e){
+					var target = $(e.target).find('input[type=radio]');
+					var which = parseInt(target.val());
+					if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+					 else $('#form-field-select-4').removeClass('tag-input-style');
+				});
+			
+			
+				$('#spinner1').ace_spinner({value:0,min:0,max:200,step:10, btn_up_class:'btn-info' , btn_down_class:'btn-info'})
+				.on('change', function(){
+					//alert(this.value)
+				});
+				$('#spinner2').ace_spinner({value:0,min:0,max:10000,step:100, touch_spinner: true, icon_up:'ace-icon fa fa-caret-up', icon_down:'ace-icon fa fa-caret-down'});
+				$('#spinner3').ace_spinner({value:0,min:-100,max:100,step:10, on_sides: true, icon_up:'ace-icon fa fa-plus smaller-75', icon_down:'ace-icon fa fa-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				//$('#spinner1').ace_spinner('disable').ace_spinner('value', 11);
+				//or
+				//$('#spinner1').closest('.ace-spinner').spinner('disable').spinner('enable').spinner('value', 11);//disable, enable or change value
+				//$('#spinner1').closest('.ace-spinner').spinner('value', 0);//reset to 0
+			
+			
+				//datepicker plugin
+				//link
+				$('.date-picker').datepicker({
+					autoclose: true,
+					todayHighlight: true
+				})
+				//show datepicker when clicking on the icon
+				.next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+			
+				//or change it into a date range picker
+				$('.input-daterange').datepicker({autoclose:true});
+			
+			
+				//to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
+				$('input[name=date-range-picker]').daterangepicker({
+					'applyClass' : 'btn-sm btn-success',
+					'cancelClass' : 'btn-sm btn-default',
+					locale: {
+						applyLabel: 'Apply',
+						cancelLabel: 'Cancel',
+					}
+				})
+				.prev().on(ace.click_event, function(){
+					$(this).next().focus();
+				});
+			
+			
+				$('#timepicker1').timepicker({
+					minuteStep: 1,
+					showSeconds: true,
+					showMeridian: false
+				}).next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+				
+				$('#date-timepicker1').datetimepicker().next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+				
+			
+				$('#colorpicker1').colorpicker();
+			
+				$('#simple-colorpicker-1').ace_colorpicker();
+				//$('#simple-colorpicker-1').ace_colorpicker('pick', 2);//select 2nd color
+				//$('#simple-colorpicker-1').ace_colorpicker('pick', '#fbe983');//select #fbe983 color
+				//var picker = $('#simple-colorpicker-1').data('ace_colorpicker')
+				//picker.pick('red', true);//insert the color if it doesn't exist
+			
+			
+				$(".knob").knob();
+				
+				
+				var tag_input = $('#form-field-tags');
+				try{
+					tag_input.tag(
+					  {
+						placeholder:tag_input.attr('placeholder'),
+						//enable typeahead by specifying the source array
+						source: ace.vars['US_STATES'],//defined in ace.js >> ace.enable_search_ahead
+						/**
+						//or fetch data from database, fetch those that match "query"
+						source: function(query, process) {
+						  $.ajax({url: 'remote_source.php?q='+encodeURIComponent(query)})
+						  .done(function(result_items){
+							process(result_items);
+						  });
+						}
+						*/
+					  }
+					)
+			
+					//programmatically add a new
+					var $tag_obj = $('#form-field-tags').data('tag');
+					$tag_obj.add('Programmatically Added');
+				}
+				catch(e) {
+					//display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+					tag_input.after('<textarea id="'+tag_input.attr('id')+'" name="'+tag_input.attr('name')+'" rows="3">'+tag_input.val()+'</textarea>').remove();
+					//$('#form-field-tags').autosize({append: "\n"});
+				}
+				
+				
+				//////////
+				
+				//typeahead.js
+				//example taken from plugin's page at: https://twitter.github.io/typeahead.js/examples/
+				var substringMatcher = function(strs) {
+					return function findMatches(q, cb) {
+						var matches, substringRegex;
+					 
+						// an array that will be populated with substring matches
+						matches = [];
+					 
+						// regex used to determine if a string contains the substring `q`
+						substrRegex = new RegExp(q, 'i');
+					 
+						// iterate through the pool of strings and for any string that
+						// contains the substring `q`, add it to the `matches` array
+						$.each(strs, function(i, str) {
+							if (substrRegex.test(str)) {
+								// the typeahead jQuery plugin expects suggestions to a
+								// JavaScript object, refer to typeahead docs for more info
+								matches.push({ value: str });
+							}
+						});
+			
+						cb(matches);
+					}
+				 }
+			
+				 $('input.typeahead').typeahead({
+					hint: true,
+					highlight: true,
+					minLength: 1
+				 }, {
+					name: 'states',
+					displayKey: 'value',
+					source: substringMatcher(ace.vars['US_STATES'])
+				 });
+					
+			
+				
+
+			
+			});
+		</script>
+

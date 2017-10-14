@@ -1,0 +1,11 @@
+<script type="text/javascript">
+  $(function(){
+    var oTable1 = $('#table_report').dataTable( {
+	"aoColumns": [
+      { "bSortable": false },
+           <?php echo $this->ncol?>
+	  { "bSortable": false }
+	] } );
+    
+  });  
+</script>  

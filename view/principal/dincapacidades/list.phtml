@@ -1,0 +1,172 @@
+<?php  
+echo $this->render('layout/charts') ?>
+<?php echo $this->render('layout/titulo') ?>
+<!-- DATOS INCAPACIDADES -->
+<?php
+ $this->titCuadro = 'Incapacidades';
+ $this->num = $this->datInc['num'];
+ $this->num2 = number_format($this->datInc['numDias']).' días';
+ echo $this->render('layout/gRectaDat') ?>
+
+<?php
+ $this->titCuadro = 'Prorrogas';
+ $this->num = $this->datPro['num'];
+ $this->num2 = number_format($this->datPro['numDias']).' días';
+ echo $this->render('layout/gRectaDat') ?>
+<!-- FIN DATOS INCAPACIDADES -->
+
+<!-- GRUPO DE GRAFICOS 1 -->
+<?php // Grafico
+$this->grafico='Gráficos correspondiente al año en curso.';
+echo $this->render('layout/graficosItems'); ?>
+<div class="row"><!-- GRUPO DE GRAFICOS 1 -->
+<?php
+  // GRAFICO DE SEXOS
+  $this->consulta='';
+  $this->gra = 1;   
+  foreach($this->datSexo as $dat) 
+  {
+     $this->consulta = $this->consulta.'{
+            "campo'.$this->gra.'": "'.$dat['nombre'].'",
+            "valor'.$this->gra.'": '.$dat['valor'].',
+        }, ';
+  }// Fin recorrido
+  ?>
+  <div class="col-sm-4">	
+   <?php 
+   $this->titGrafico='Incapacidades por sexos ';    
+   $this->grafico = 'dona'; 
+   echo $this->render('layout/gDona3d') ?>
+  </div>
+
+<?php
+  // GRAFICO DE LAS EDADES DE EMPLEADOS
+  $this->consulta='';  
+  $this->gra = 2;
+  foreach($this->datEdades as $dat)  
+  {
+     $this->consulta = $this->consulta.'{
+            "campo'.$this->gra.'": "'.$dat['edad'].'",
+            "valor'.$this->gra.'": '.$dat['numero'].',
+        }, ';
+  }// Fin recorrido
+  ?>
+  <div class="col-sm-4">	
+   <?php 
+   $this->titGrafico='Distribución de edades';    
+   $this->grafico = 'donaEdades'; 
+   echo $this->render('layout/gDona3d') ?>
+  </div>  
+
+<?php
+  // NUMERO DE INCAPACIDADES
+  $this->consulta='';  
+  $this->gra = 3;
+  foreach($this->datIncap as $dat)  
+  {
+     $this->consulta = $this->consulta.'{
+            "campo'.$this->gra.'": "'.$dat['nombre'].'",
+            "valor'.$this->gra.'": '.$dat['valor'].',
+        }, ';
+  }// Fin recorrido
+  ?>
+  <div class="col-sm-4">	
+   <?php 
+   $this->titGrafico='Tipos de incapacidades';    
+   $this->grafico = 'donaEdadesSex'; 
+   echo $this->render('layout/gDona3d') ?>
+  </div>  
+
+</div><!-- FIN GRUPO DE GRAFICOS 1 -->
+
+<?php // Grafico
+$this->grafico='Línea de incapacidades de los últimos 3 daños.';
+echo $this->render('layout/graficosItems'); ?>
+
+<div class="row"><!-- GRUPO DE GRAFICOS 2 -->
+<?php
+  // GRAFICO DE INCAPACIDAES 3 AÑOS
+  $this->consulta='';
+  $this->gra = 4;  
+  $ano = '';
+  foreach($this->datIncAno as $dat) 
+  { 
+     $ano = $dat['ano'];
+  }  
+  $this->titCampo1=$ano-2; // Años anteriores
+  $this->titCampo2=$ano-1;
+  $this->titCampo3=$ano;
+  foreach($this->datIncAno as $dat) 
+  {
+    $this->consulta = $this->consulta.'{
+            "titulo": "'.$dat['mes'].'",
+            "campo1": '.$dat['ano3'].',
+            "campo2": '.$dat['ano2'].',
+            "campo3": '.$dat['ano1'].',                        
+        }, ';
+  }// Fin recorrido
+  ?>
+  <div class="col-sm-12">	
+   <?php 
+   $this->titGrafico='Linea de incapacidades';    
+   $this->grafico = 'linea'; 
+   echo $this->render('layout/gLinea3d') ?>
+  </div>
+
+</div><!-- FIN GRUPO DE GRAFICOS 2 -->  
+
+
+<?php // Grafico
+$this->grafico='Tipos de incapacidades por sexo.';
+echo $this->render('layout/graficosItems'); ?>
+
+<div class="row"><!-- GRUPO DE GRAFICOS 3 -->
+<?php
+  // GRAFICO DE SEXOS POR TIPOS DE INCAPACIDADES
+  $this->consulta='';
+  $this->gra = 5;  
+  $this->titCampo1='Hombre'; 
+  $this->titCampo2='Mujer';
+  foreach($this->datIncSex as $dat) 
+  {
+     $this->consulta = $this->consulta.'{
+            "datos": "'.$dat['nombre'].'",
+            "campo1": '.$dat['hombre'].',
+            "campo2": '.$dat['mujer'].',
+        }, ';
+  }// Fin recorrido
+?>
+  <div class="col-sm-12"> 
+   <?php 
+   $this->titGrafico='Incapacidades por tipo y sexo';    
+   $this->grafico = 'incSexo'; 
+   echo $this->render('layout/gColumn2d') ?>
+  </div>
+
+</div><!-- FIN GRUPO DE GRAFICOS 3 -->  
+
+
+<div class="row"><!-- GRUPO DE GRAFICOS 4 -->
+<?php
+  // GRAFICO DE INCAPACIDADES POR CENTROS DE COSTOS
+  $this->consulta='';
+  $this->gra = 6;  
+  $this->titCampo1='Incapacidad'; 
+  $this->titCampo2='Prorroga';
+  foreach($this->datIncCcos as $dat) 
+  {
+     $this->consulta = $this->consulta.'{
+            "dato": "'.$dat['id'].'",
+            "campo1": '.$dat['numInc'].',
+            "campo2": '.$dat['numPro'].',
+        }, ';
+  }// Fin recorrido
+?>
+  <div class="col-sm-12"> 
+   <?php 
+   $this->titGrafico='Incapacidades por centro de costos';    
+   $this->grafico = 'incCecostos'; 
+   echo $this->render('layout/gColLinea') ?>
+  </div>
+
+</div><!-- FIN GRUPO DE GRAFICOS 4 -->          

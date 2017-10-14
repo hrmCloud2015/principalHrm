@@ -1,0 +1,119 @@
+<ul class="nav nav-pills">
+    <li id="prog<?php echo $this->idE ?>"><a href="#">Programación</a></li>
+</ul>
+
+<script>
+$(function () {
+  $("#prog<?php echo $this->idE ?>").click(function () {  
+        var b = <?php echo $this->idE ?>;
+        var parametros = {
+            "id"  : b,                
+        };            
+         $( "#calendario" ).dialog( "open" );
+      });// Generacion de nomina
+  })
+</script>
+
+
+<script>
+  $(function() {
+    $( "#calendario" ).dialog({
+      autoOpen: false,
+      height: 1000,
+      width: 1200,      
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      },
+      buttons: {
+          "Agregar evento": function() {          
+           var id      = $("#id").val();
+           var idNest  = $("#idNest2").val();
+           var inst    = $("#comenN").val();
+           var titulo  = $("#comenN2").val();
+                      
+           if($("#comenN").val().length < 1) {  
+              alert("Debe escribir el nombre de la institución");  
+              return false;  
+            }  
+
+           if($("#comenN2").val().length < 1) {  
+              alert("Debe escribir el titulo obtenido");  
+              return false;  
+            }  
+            $( "#formGuaradarE" ).submit();          
+ 
+          },
+          Cancel: function() {
+          $( this ).dialog( "close" );          
+        }
+      }
+    });  
+
+  });
+</script>
+
+
+<?php
+$datP = '';
+foreach($this->datPro as $dat)
+{
+       $datP = '{
+          date: new Date('.$dat['ano'].', '.$dat['mes'].', '.$dat['dia'].'),
+          data: { message: "'.$dat['comen'].'" },
+          repeatMonth: true
+        },';
+
+} 
+?>
+
+
+<!-- CALENDARIO -->
+  
+<link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>calendario/css/calendar.css">
+
+  
+
+  <!-- Core CSS File. The CSS code needed to make eventCalendar works -->
+  <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>calendario/css/eventCalendar.css">
+
+  <!-- Theme CSS file: it makes eventCalendar nicer -->
+  <link rel="stylesheet" href="<?php echo $this->basePath()."/" ?>calendario/css/eventCalendar_theme_responsive.css">
+
+
+<div id="calendario" title="Calendario">    
+</div>
+
+
+    <div class="row">
+      <div class="col-sm-6">:<br />    
+        <div id="eventCalendarHumanDate" style="heigth=100px;"></div>
+
+      </div>
+        
+        <script>
+          $(document).ready(function() {
+            $("#eventCalendarHumanDate").eventCalendar({
+              eventsjson: 'json/event.humanDate.json.php',
+              showDayAsWeeks: false
+            });
+          });
+        </script>
+<pre>$(id).eventCalendar({
+  eventsjson: 'file.json',
+  showDayAsWeeks: false
+});</pre>
+       
+
+
+
+
+</div>    
+
+<script src="<?php echo $this->basePath()."/" ?>calendario/js/moment.js" type="text/javascript"></script>
+<!--script src="js/jquery.eventCalendar.js" type="text/javascript"></script-->
+<script src="<?php echo $this->basePath()."/" ?>calendario/js/jquery.eventCalendar.min.js" type="text/javascript"></script>

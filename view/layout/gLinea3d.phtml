@@ -1,0 +1,79 @@
+        <script>
+            var chart;
+
+            var chartData<?php echo $this->gra?> = [<?php echo $this->consulta; ?>];
+
+            AmCharts.ready(function () {
+                // SERIAL CHART
+                chart = new AmCharts.AmSerialChart();
+                chart.dataProvider = chartData<?php echo $this->gra?>;
+                chart.categoryField = "titulo";
+                chart.startDuration = 0.5;
+                chart.balloon.color = "#000000";
+
+                // AXES
+                // category
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.fillAlpha = 1;
+                categoryAxis.fillColor = "#FAFAFA";
+                categoryAxis.gridAlpha = 0;
+                categoryAxis.axisAlpha = 0;
+                categoryAxis.gridPosition = "start";
+                categoryAxis.position = "top";
+
+                // value
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.title = "<?php echo $this->titGrafico; ?>";
+                valueAxis.dashLength = 5;
+                valueAxis.axisAlpha = 0;
+                valueAxis.minimum = 1;
+                valueAxis.maximum = 6;
+                valueAxis.integersOnly = true;
+                valueAxis.gridCount = 10;
+                valueAxis.reversed = true; // this line makes the value axis reversed
+                chart.addValueAxis(valueAxis);
+
+                // GRAPHS
+                // campo1 graph
+                var graph = new AmCharts.AmGraph();
+                graph.title = "<?php echo $this->titCampo1?>";
+                graph.valueField = "campo1";
+                //graph.hidden = true; // this line makes the graph initially hidden
+                graph.balloonText = "[[category]]: [[value]]";
+                graph.lineAlpha = 1;
+                graph.bullet = "round";
+                chart.addGraph(graph);
+
+                // campo2 graph
+                var graph = new AmCharts.AmGraph();
+                graph.title = "<?php echo $this->titCampo2?>";
+                graph.valueField = "campo2";
+                graph.balloonText = "[[category]]: [[value]]";
+                graph.bullet = "round";
+                chart.addGraph(graph);
+
+                // United Kingdom graph
+                var graph = new AmCharts.AmGraph();
+                graph.title = "<?php echo $this->titCampo3?>";
+                graph.valueField = "campo3";
+                graph.balloonText = "[[category]]: [[value]]";
+                graph.bullet = "round";
+                chart.addGraph(graph);
+
+                // CURSOR
+                var chartCursor = new AmCharts.ChartCursor();
+                chartCursor.cursorPosition = "mouse";
+                chartCursor.zoomable = false;
+                chartCursor.cursorAlpha = 0;
+                chart.addChartCursor(chartCursor);
+
+                // LEGEND
+                var legend = new AmCharts.AmLegend();
+                legend.useGraphSettings = true;
+                chart.addLegend(legend);
+
+                // WRITE
+                chart.write("chartdiv");
+            });
+        </script>
+        <div id="chartdiv" style="width: 100%; height: 400px;"></div>
