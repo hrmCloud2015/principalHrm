@@ -614,7 +614,43 @@ class Formulario extends Form
             'options' => array( 
                 'label' => '',
             ), 
-        ));                 
+        ));            
+         // COMENTARIOS SIN EDITOR
+        $this->add(array( 
+            'name' => 'comenN13', 
+            'type' => 'textarea', 
+            'attributes' => array( 
+                'class'    => 'form-control',
+                'id'       => 'comenN', 
+            ), 
+            'options' => array( 
+                'label' => '',
+            ), 
+        )); 
+        // COMENTARIOS SIN EDITOR
+        $this->add(array( 
+            'name' => 'comenN19', 
+            'type' => 'textarea', 
+            'attributes' => array( 
+                'class'    => 'form-control',
+                'id'       => 'comenN', 
+            ), 
+            'options' => array( 
+                'label' => '',
+            ), 
+        )); 
+       // COMENTARIOS SIN EDITOR
+        $this->add(array( 
+            'name' => 'comenN20', 
+            'type' => 'textarea', 
+            'attributes' => array( 
+                'class'    => 'form-control',
+                'id'       => 'comenN', 
+            ), 
+            'options' => array( 
+                'label' => '',
+            ), 
+        ));             
         // COMENTARIOS SIN EDITOR
         $this->add(array( 
             'name' => 'comenN11', 
@@ -834,7 +870,17 @@ class Formulario extends Form
                 'id' => 'guardar',
                 'class' => 'btn btn-white btn-purple btn-sm'
             ),
-        ));           
+        ));     
+           // REGISTRAR
+        $this->add(array(
+            'name' => 'registrar2',
+            'attributes' => array(
+                'type'  => 'submit',
+                'value' => 'Registrar',
+                'id' => 'guardar',
+                'class' => 'btn btn-white btn-purple btn-sm'
+            ),
+        ));                      
         // ENVIAR EMAIL
         $this->add(array(
             'name' => 'envioEmail',
@@ -3993,7 +4039,28 @@ $this->add($select);
                                      '1'=>"SI"
                               ));
         $this->add($select);
-
+         //Condicion general.
+        $select = new Element\Select('siNo4');
+        $select->setLabel('');
+        $select->setAttribute('multiple', false);
+        $select->setAttribute('id', "idLinFis");
+        $select->setValueOptions(array(
+                                     '0'=>"NO",
+                                     '1'=>"SI"
+                              ));
+        $this->add($select);
+        
+        //Condicion general.
+        $select = new Element\Select('siNo5');
+        $select->setLabel('');
+        $select->setAttribute('multiple', false);
+        $select->setAttribute('id', "idLinFis");
+        $select->setValueOptions(array(
+                                     '0'=>"NO",
+                                     '1'=>"SI"
+                              ));
+        $this->add($select);
+        
         $this->add(array( 
             'name' => 'csrf', 
             'type' => 'Zend\Form\Element\Csrf', 
