@@ -1982,13 +1982,13 @@ case when d.id is null then ( c.valor - a.dias ) else
 
               $datVc   = $g->getVacasPromFinal( $idEmp, $fechaAnAnt , $fechaF, $diasPromV, $fechaAnAnt, 0 ); // Valor de prima a pagar
               $diasVaca =  round( ( ( ($diasVaca) * 15 ) / 360),2 );  
-
+//$diasVaca = 13.5;
 //echo 'Dias  vaca '.$diasVaca;
               // Actualizar dias de vaciones pendientes
               $d->modGeneral("update n_nomina_l  
                        set diasVaca=".$diasVaca.",
                            diasPromV=".$diasPromV." 
-                        where idNom = 0 and idEmp=".$ide);              
+                      where idNom = 0 and idEmp=".$ide);              
               //echo '----------------------- Vacaciones <br />';                            
               //echo 'Dias vaca '.round( $diasVaca ,2).'<br />Valor base promedio vaca '.round($datVc["vlrBasePromedioVaca"],2).'= '.round($datVc["vlrBasePromedioVaca"],2)*round( $diasVaca ,2).'<br /><hr />';
               //echo round($datVc["total"],2);
@@ -2557,7 +2557,12 @@ case when d.id is null then ( c.valor - a.dias ) else
                       //  $d->modGeneral("update n_nomina_e_d 
                       //        set devengado = 0 where id=".$idInom);
 
-                    }                     
+                    }               
+                    // Buscar ceasntias editadas
+                    $datCesAnt = $d->getGeneral1("select a.devengado from n_nomina_nov a where idGrupo = 99 and idEmp = ".$ide." and idConc = 213 "); 
+                    //print_r($datCesAnt) ;
+                    if ($datCesAnt['devengado']>0)     
+                        $valorCesantiasReal = $datCesAnt['devengado'];
 
                    // INTERESE DE CENSATIAS 
                     if ($regimen == 0)

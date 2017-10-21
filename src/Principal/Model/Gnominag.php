@@ -698,7 +698,7 @@ from n_nomina a
 inner join n_nomina_e b on b.idNom = a.id
 inner join ".$tabla." c on c.reportada in ('0','1')  and c.idEmp = b.idEmp #  Se cargan todas las incapacidades antes de fin del perioso en cuestio
 left join c_general d on d.id = 1 # Buscar datos de la confguracion general para incapaciades 
-where a.id = ".$id." and b.actVac != 1  and c.fechai <= a.fechaF # el inicio de la prorroga sea menor al inicio de la vacaciones 
+where a.id = ".$id."  and c.fechai <= a.fechaF # el inicio de la prorroga sea menor al inicio de la vacaciones 
   and ( case when ( ( c.reportada = 1 ) and ( c.fechaf < a.fechaI ) ) then 1 else 0 end ) = 0 # verificar que si ya esta reportada al fecha final de la incapacidad este dentro del periodo de liquidacion   
 )   ",Adapter::QUERY_MODE_EXECUTE);
 //and ( (c.fechai <= a.fechaF) and (c.fechaf >= a.fechaI ) ) ## OJOA ANALIZAR ESTO DE LA MEJR FORMA 
@@ -1362,7 +1362,11 @@ where c.estado=0 and ( c.idCal = ".$idIcal." or b.idTnom = 5 ) and  b.id =".$id.
                   datediff( b.fechaF , concat( '01-',lpad( month(c.fechaI),2,'0' ) , '-', year(c.fechaI)  ) )
                else 
                  # dias dentro del periodo 
-                 ( datediff( concat( year(c.fechaF) , '-',lpad( month(c.fechaF),2,'0' ) , '-30') , b.fechaR  ) + 1 )   
+                   case when b.fechaI > c.fechaI then 
+                    datediff( b.fechaI, c.fechaI ) 
+                 else    
+                   ( datediff( concat( year(c.fechaF) , '-',lpad( month(c.fechaF),2,'0' ) , '-30') , b.fechaR  ) + 1 ) 
+                end   
                end 
             end    
              
@@ -1401,11 +1405,12 @@ where c.estado=0 and ( c.idCal = ".$idIcal." or b.idTnom = 5 ) and  b.id =".$id.
      1 
     else 0 end             
     as retorna ,
- datediff( b.fechaR, b.fechaI ) as diasVac ,
+   datediff( b.fechaR, b.fechaI ) as diasVac ,
  ( select count(aa.id) 
       from n_nomina_e aa  
-         where aa.idEmp = a.idEmp and aa.idVac = b.id and aa.idNom != a.idNom 
-    ) as vacPaga , # Dtereminar si la vacacion ya fue pagada    
+          inner join n_nomina bb on bb.id = aa.idNom 
+         where aa.idEmp = a.idEmp and aa.idVac = b.id and aa.idNom != a.idNom and bb.estado =  2 
+    ) as vacPaga , # Dtereminar si la vacacion ya fue pagada  
 ( datediff( c.fechaF , b.fechaR ) + 1 ) as diasRetorno 
             from n_nomina_e a 
                  inner join n_vacaciones b on b.id=a.idVac and b.estado in ('1','2')  
@@ -2251,12 +2256,12 @@ else # Calculo para el regumen anterior
       $result=$this->adapter->query("Select 
      case when f.regimen = 0 then
 
-        ( ( ( ( sum( a.devengado ) / ".$diasPromedio." ) * 30 ) + (case when dd.promPrimas = 0 then (f.sueldo 
+        ( ( ( ( sum( a.devengado ) / ".$dias." ) * 30 ) + (case when dd.promPrimas = 0 then (f.sueldo 
 + ( case when f.sueldo>(2*".$this->salarioMinimo.")  then 0 else ".$this->subsidioTransporte." end ) + ( case when f.representante=1 then (4*".$this->salarioMinimo.") else 0 end ) 
         ) else 0 end )  )* ".$dias.")/360   
      else # Calculo para el regumen aanterior       
 
-        (( ( ( sum( a.devengado ) / ".$diasPromedio." ) * 30 ) + (case when dd.promPrimas = 0 then f.sueldo + 
+        (( ( ( sum( a.devengado ) / ".$dias." ) * 30 ) + (case when dd.promPrimas = 0 then f.sueldo + 
 ( case when f.sueldo>(2*".$this->salarioMinimo.") then 0 else ".$this->subsidioTransporte." end ) + ( case when f.representante=1 then (4*".$this->salarioMinimo.") else 0 end ) 
 
       else 0 end )  ) * ".$dias.")/360   
@@ -2264,7 +2269,7 @@ else # Calculo para el regumen anterior
 
       case when f.regimen = 0 then
 
-        ( ( sum( a.devengado ) / ".$diasPromedio." ) * 30 )    
+        ( ( sum( a.devengado ) / ".$dias." ) * 30 )    
      else # Calculo para el regumen aanterior       
 
         (( ( ( sum( a.devengado ) / 1 ) * 1) + (case when dd.promPrimas = 0 then f.sueldo + 
@@ -2480,6 +2485,20 @@ where year(a.fechaI) = ".$ano." and month(a.fechaF) = ".$mes." and a.id != ".$id
                                           ",Adapter::QUERY_MODE_EXECUTE);
       $datos=$result->current();
       return $datos;       
-   }         
+   }
+
+ // Empleados en liquidacion 
+   public function getEmpReLiq($con)
+   {     
+     $result=$this->adapter->query("select b.id, b.idNom, c.CedEmp, c.nombre , c.apellido , d.fechaIngreso, d.fechaI,  d.fechaF, c.idGrup   
+                     from n_nomina a 
+                       inner join n_nomina_e b on b.idNom = a.id 
+                       inner join a_empleados c on c.id = b.idEmp 
+                       inner join n_nomina_l d on d.idNom = a.id and d.idEmp = c.id 
+                     where a.idGrupo = 99 and a.estado = 2 ".$con." 
+                        order by a.fechaF desc",Adapter::QUERY_MODE_EXECUTE);
+      $datos=$result->toArray();
+      return $datos;       
+   }                                      
 }
 ?>

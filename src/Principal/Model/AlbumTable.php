@@ -2200,7 +2200,7 @@ and a.fechaI >= '".$fecIni."' and a.fechaF <= '".$fecSal."'
    public function getSovac($con)
    {
       $result=$this->adapter->query("select a.*,b.CedEmp,b.nombre,b.apellido,
-                      concat(c.nombre,' (', c.deno,')' ) as nomCar, d.nombre as nomTnom 
+                      concat(c.nombre,' (', c.deno,')' ) as nomCar, d.nombre as nomTnom  
                                             from n_vacaciones a 
                                             inner join a_empleados b on b.id=a.idEmp
                                             inner join t_cargos c on c.id=b.idCar 
